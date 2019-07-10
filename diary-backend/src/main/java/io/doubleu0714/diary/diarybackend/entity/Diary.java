@@ -61,6 +61,9 @@ public class Diary extends BaseInfo {
     @JoinColumn(nullable = false)
     private Member member;
 
+    /**
+     * 일기에 등록한 해쉬태그 목록
+     */
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "diary")
     private List<HashTag> hashTags;
 }
