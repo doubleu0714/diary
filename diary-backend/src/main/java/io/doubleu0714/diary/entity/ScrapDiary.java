@@ -8,15 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.Value;
 
 /**
  * <h1>스크랩정보</h1>
  * 다른 회원의 일기를 스크랩한 정보를 저장하는 엔터티
  */
-@Value(staticConstructor = "of")
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Getter
 @EqualsAndHashCode(callSuper = true)
 @ToString
 @Entity
