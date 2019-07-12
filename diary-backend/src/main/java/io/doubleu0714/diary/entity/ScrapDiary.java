@@ -1,7 +1,8 @@
-package io.doubleu0714.diary.diarybackend.entity;
+package io.doubleu0714.diary.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -36,14 +37,14 @@ public class ScrapDiary extends BaseInfo {
     /**
      * 스크랩한 diary
      */
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)
     private Diary diary;
 
     /**
      * 스크랩한 회원
      */
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)
     private Member member;
 }

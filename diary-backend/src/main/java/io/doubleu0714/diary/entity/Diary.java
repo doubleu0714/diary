@@ -1,16 +1,21 @@
-package io.doubleu0714.diary.diarybackend.entity;
+package io.doubleu0714.diary.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import lombok.Value;
 import lombok.ToString.Exclude;
+import lombok.Value;
 
 /**
  * <h1>일기 엔터티</h1>
@@ -52,7 +57,13 @@ public class Diary extends BaseInfo {
      * 일기 작성자 회원
      */
     @Exclude
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)
     private Member member;
+
+    /**
+     * 일기에 등록한 해쉬태그 목록
+     */
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "diary")
+    private List<HashTag> hashTags;
 }
