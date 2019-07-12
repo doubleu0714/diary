@@ -4,14 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.Value;
 
 /**
  * <h1>회원 엔터티</h1>
  */
-@Value(staticConstructor = "of")
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Getter
 @EqualsAndHashCode(callSuper = true)
 @ToString
 @Entity

@@ -12,10 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.ToString.Exclude;
-import lombok.Value;
 
 /**
  * <h1>일기 엔터티</h1>
@@ -23,7 +27,10 @@ import lombok.Value;
  * 공개 일기의 경우 모든 회원들에게 노출 됩니다.<br/>
  * 다른 사람의 일기를 스크랩 할 수 있습니다.<br/>
  */
-@Value(staticConstructor = "of")
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Getter
 @EqualsAndHashCode(callSuper = true)
 @ToString
 @Entity
