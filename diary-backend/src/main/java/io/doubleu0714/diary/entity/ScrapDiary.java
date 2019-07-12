@@ -1,4 +1,4 @@
-package io.doubleu0714.diary.diarybackend.entity;
+package io.doubleu0714.diary.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,32 +13,38 @@ import lombok.ToString;
 import lombok.Value;
 
 /**
- * <h1>일기에 등록한 해쉬태그</h1>
- * 등록한 해쉬태그로 조회 할 수 있다.
+ * <h1>스크랩정보</h1>
+ * 다른 회원의 일기를 스크랩한 정보를 저장하는 엔터티
  */
 @Value(staticConstructor = "of")
 @EqualsAndHashCode(callSuper = true)
 @ToString
 @Entity
-public class HashTag extends BaseInfo {
+public class ScrapDiary extends BaseInfo {
     /**
-     * 자동생성 아이디
+     * 자동 생성된 아이디
      */
     @Id
     @GeneratedValue
-    private long hashTagId;
+    private long scrapId;
 
     /**
-     * 사용자가 입력한 해쉬태그<br/>
-     * '#'로 시작해서 띄어쓰기 혹은 '#' 까지의 문자열
+     * 스크램시 작성한 일기에 대한 자기평
      */
-    @Column(length = 50, nullable = false)
-    private String hashTag;
+    @Column(length = 1000)
+    private String scrapComment;
 
     /**
-     * 대상 일기
+     * 스크랩한 diary
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)
     private Diary diary;
+
+    /**
+     * 스크랩한 회원
+     */
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(nullable = false)
+    private Member member;
 }

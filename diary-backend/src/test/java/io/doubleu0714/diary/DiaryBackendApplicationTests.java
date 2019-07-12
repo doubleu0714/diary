@@ -1,4 +1,4 @@
-package io.doubleu0714.diary.diarybackend;
+package io.doubleu0714.diary;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

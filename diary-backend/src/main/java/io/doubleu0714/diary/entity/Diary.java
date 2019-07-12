@@ -1,4 +1,4 @@
-package io.doubleu0714.diary.diarybackend.entity;
+package io.doubleu0714.diary.entity;
 
 import java.util.List;
 
