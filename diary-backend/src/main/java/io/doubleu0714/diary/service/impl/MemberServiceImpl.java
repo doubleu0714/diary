@@ -1,10 +1,14 @@
 package io.doubleu0714.diary.service.impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import io.doubleu0714.diary.dto.MemberDTO;
@@ -67,12 +71,17 @@ public class MemberServiceImpl implements MemberService {
             return MemberDTO.of(entity.getMemberId(), entity.getMemberName(), entity.getPassword(), entity.getEmail());
         } catch(NoSuchElementException e) {
             log.error("회원 정보가 없습니다.", e);
-            throw new NoSuchElementException("회원 정보가 없습니다. ");
+            throw new NoSuchElementException("회원 정보가 없습니다.");
         }
     }
 
-
-    private boolean getTest() {
-        return true;
-    }
+    @Override
+    public List<MemberDTO> getMembers(int pageNo) {
+        log.info("CALL MemberServiceImpl.getMembers. param: {pageNo: {}}", pageNo);
+        if(pageNo <= 0) throw new IllegalArgumentException("잘못된 페이지 입니다.");
+        return memberRepository
+                .findAll(PageRequest.of(pageNo - 1, 10, Sort.by(Order.desc("modifiedAt"))))
+                .map(entity -> MemberDTO.of(entity.getMemberId(), entity.getMemberName(), entity.getPassword(), entity.getEmail()))
+                .getContent();
+	}
 }
